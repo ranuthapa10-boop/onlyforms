@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome — Reach Out</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1410;
+      --cream: #f5f0e8;
+      --warm: #e8dfd0;
+      --rust: #b85c38;
+      --gold: #c9a84c;
+      --muted: #7a6e63;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.6;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    /* Left panel */
+    .left {
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+    .left::before {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.12);
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .left-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4vw, 4.2rem);
+      line-height: 1.12;
+      font-weight: 700;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(245,240,232,0.7);
+      max-width: 36ch;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--rust);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 1rem 2rem;
+      width: fit-content;
+      transition: background 0.25s, transform 0.2s;
+      animation: fadeUp 0.9s 0.65s ease both;
+    }
+
+    .cta-btn:hover {
+      background: #a04e2e;
+      transform: translateX(4px);
+    }
+
+    .cta-btn svg { transition: transform 0.2s; }
+    .cta-btn:hover svg { transform: translateX(4px); }
+
+    .left-footer {
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.35);
+      animation: fadeUp 0.9s 0.8s ease both;
+    }
+
+    /* Right panel */
+    .right {
+      background: var(--warm);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3.5rem;
+      gap: 3rem;
+      position: relative;
+    }
+
+    .feature-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .card {
+      background: var(--cream);
+      padding: 1.75rem;
+      border-left: 3px solid var(--rust);
+      animation: slideIn 0.7s ease both;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.4s; }
+    .card:nth-child(2) { animation-delay: 0.55s; }
+    .card:nth-child(3) { animation-delay: 0.7s; }
+
+    .card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .divider-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page { grid-template-columns: 1fr; }
+      .left { padding: 2.5rem 2rem; min-height: 60vh; }
+      .right { padding: 2.5rem 2rem; }
+      h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Left Panel -->
+    <div class="left">
+      <div class="brand">Reach Out</div>
+
+      <div class="left-content">
+        <p class="eyebrow">We'd love to hear from you</p>
+        <h1>Let's start a <em>conversation</em> that matters.</h1>
+        <p class="lead">
+          Whether you have a question, a project in mind, or simply want to connect — our team is ready to listen and respond thoughtfully.
+        </p>
+        <a href="form.html" class="cta-btn">
+          Get in Touch
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="left-footer">© 2026 Reach Out. All rights reserved.</div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right">
+      <p class="divider-text">Why connect with us</p>
+      <div class="feature-cards">
+        <div class="card">
+          <div class="card-icon">✦</div>
+          <h3>Swift Responses</h3>
+          <p>We reply to every message within one business day — no black holes, no auto-replies.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">◈</div>
+          <h3>Genuine Attention</h3>
+          <p>Your message is read by a real person who gives it the thought it deserves.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">❋</div>
+          <h3>No Spam, Ever</h3>
+          <p>Your details stay private. We reach out only when it's genuinely relevant.</p>
+        </div>
+      </div>
+      <p class="divider-text">Ready? &nbsp;→&nbsp; Fill in the form</p>
+    </div>
+
+  </div>
+</body>
+</html>
